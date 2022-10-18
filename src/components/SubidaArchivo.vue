@@ -1,12 +1,36 @@
 <template>
-    <div class="file-upload">
-      <input type="file" @change="onFileChange" accept="application/pdf,application"/>
-      <div v-if="progress" class="progess-bar" :style="{'width': progress}">
-        {{progress}}
+  <v-container>
+    <v-card>
+      <v-card-title class="centrarTitulo">
+        CÉDULA DE IDENTIFICACIÓN FISCAL
+      </v-card-title>
+      <v-row>
+        <v-col>
+          <div class="d-flex centrar pl-5 accent-4">
+            <input type="file" @change="onFileChange" accept="application/pdf,application"/>
+            <div v-if="progress" class="progess-bar" :style="{'width': progress}">
+              {{progress}}
+            </div>
+          </div>
+        </v-col>
+      </v-row>  
+      <v-row>
+        <div class="d-flex pl-5 centrar accent-4">
+          <v-btn @click="onUploadFile" class="upload-button"
+            :disabled="!this.selectedFile">ENVIAR</v-btn>
         </div>
-      <button @click="onUploadFile" class="upload-button"
-      :disabled="!this.selectedFile">Subir Archivo</button>
-    </div>
+      </v-row>      
+      <v-row >
+        <v-col>
+          <div class="d-flex centrar l-16 l-auto pa-5 accent-4 red--text">
+            *Te invitamos a ser parte de la actualización del Servicio de facturación CFDI versión 4.0.
+            <br>
+            **Es sencillo, solo tienes que seleccionar el archivo que contiene tu Cédula de Identificación Fiscal (CIF) en formato .pdf y presionar el botón de "ENVIAR"
+          </div>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-container>
   </template>
   
   <script>
@@ -30,7 +54,7 @@
   
        // sending file to the backend
         axios
-          .post("http://localhost:443/upload", formData, { 
+          .post("http://reco.centralexpress.info:4000/upload", formData, { 
             onUploadProgress: ProgressEvent => {
             let progress =
               Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)
@@ -87,3 +111,15 @@ button {
   background-color: #b3bcc4;
   cursor: no-drop;
 }
+
+.centrar {
+    justify-content: center;
+    text-align: center;
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    font-size: 20px;
+  }
+  .centrarTitulo {
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+  }
