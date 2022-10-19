@@ -54,7 +54,7 @@
   
        // sending file to the backend
         axios
-          .post("https://reco.centralexpress.info:4000/upload", formData, { 
+          .post("https://reco-api.centralexpress.info/upload", formData, { 
             onUploadProgress: ProgressEvent => {
             let progress =
               Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)
