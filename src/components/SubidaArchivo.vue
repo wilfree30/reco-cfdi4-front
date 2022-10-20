@@ -17,7 +17,7 @@
       <v-row>
         <div class="d-flex pl-5 centrar accent-4">
           <v-btn @click="onUploadFile" class="upload-button"
-            :disabled="isDisabled()">ENVIAR</v-btn>
+            :disabled="!this.selectedFile">ENVIAR</v-btn>
         </div>
       </v-row>      
       <v-row >
@@ -57,11 +57,6 @@
   import axios from "axios";
   
   export default {
-    computed :{ 
-      isDisabled () {
-        return !this.selectedFile || isDisabled
-      }
-    },
     data() {
       return {
         selectedFile: "",
@@ -69,7 +64,6 @@
         dialog: false,
         respuesta:[],
         fallido:[],
-        isDisabled: false
       };
     },
     methods: {
@@ -96,7 +90,6 @@
               archivo_recibido: this.selectedFile
             }, */
             onUploadProgress: progressEvent => {
-              this.isDisabled = false
               this.progress = Math.round(
                 (progressEvent.loaded / progressEvent.total) * 100
               ) + "%";
