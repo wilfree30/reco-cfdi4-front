@@ -16,8 +16,11 @@
       </v-row>  
       <v-row>
         <div class="d-flex pl-5 centrar accent-4">
-          <v-btn @click="onUploadFile" class="upload-button"
-            :disabled="!this.selectedFile || !isLoading">ENVIAR</v-btn>
+          <v-btn 
+          v-on:click="onUploadFile, loader = 'loading'" class="upload-button"
+            :disabled="!this.selectedFile || loading3"
+            :loading="loading3"
+            >ENVIAR</v-btn>
         </div>
       </v-row>      
       <v-row >
@@ -38,7 +41,6 @@
       {{respuesta}}
     </h1>
     <h1 v-else>{{fallido}}</h1>
-        
         <template v-slot:action="{ attrs }">
             <v-btn
             color="blue"
@@ -59,13 +61,22 @@
   export default {
     data() {
       return {
+        loading3: false,
         selectedFile: "",
         progress: 0,
         dialog: false,
         respuesta:[],
-        fallido:[],
-        isLoading: false
       };
+    },
+    watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
     },
     methods: {
       close(){
@@ -91,7 +102,6 @@
               archivo_recibido: this.selectedFile
             }, */
             onUploadProgress: progressEvent => {
-              this.isLoading = true
               this.progress = Math.round(
                 (progressEvent.loaded / progressEvent.total) * 100
               ) + "%";
@@ -99,7 +109,6 @@
           })
           .then((res) => {
             //res.data
-            this.isLoading = false
             this.progress = null;
             this.respuesta = res.data.nombre
             this.fallido = res.data
