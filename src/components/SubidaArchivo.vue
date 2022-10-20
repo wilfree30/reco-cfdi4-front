@@ -40,7 +40,8 @@
     data() {
       return {
         selectedFile: "",
-        progress: 0
+        progress: 0,
+        archivo_recibido: 'archivo_recibido',
       };
     },
     methods: {
@@ -50,13 +51,18 @@
       },
       onUploadFile() {
         const formData = new FormData();
-        formData.append("file", this.selectedFile);  // appending file
+        //formData.append("file", this.selectedFile);  // appending file
+        formData.append("archivo_recibido", this.selectedFile) 
   
        // sending file to the backend
         axios
-          .post("http://reco-api.centralexpress.info/upload", formData, { 
+          .post("https://cfdi4-api.centralexpress.info/upload", formData, { 
             headers: {
-              "Content-Type": "multipart/form-data"
+              "accept": "application/json",
+              "Content-Type": "multipart/form-data",
+            },
+            data:{
+              archivo_recibido: this.selectedFile
             },
             onUploadProgress: progressEvent => {
               this.progress = Math.round(
@@ -65,10 +71,13 @@
             }
           })
           .then((res) => {
+            res.data
+            console.log(this.selectedFile)
             console.log(res);
             this.progress = null;
           })
           .catch((err) => {
+            console.log(this.selectedFile)
             console.log(err.response.data);
             this.progress = null;
           });
