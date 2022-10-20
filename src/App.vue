@@ -48,6 +48,9 @@ export default {
   data: () => ({
     //
   }),
+  created () {
+      document.title = "RECOLECCIÓN DE CÉDULAS - CENTRAL EXPRESS";
+  }
 };
 </script>
 
