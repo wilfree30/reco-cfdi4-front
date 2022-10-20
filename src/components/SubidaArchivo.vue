@@ -34,7 +34,11 @@
         v-model="dialog"
         :timeout="1500"
     >   
-        {{respuesta}}
+    <h1 v-if="respuesta">
+      {{respuesta}}
+    </h1>
+    <h1 v-else>{{fallido}}</h1>
+        
         <template v-slot:action="{ attrs }">
             <v-btn
             color="blue"
@@ -59,6 +63,7 @@
         progress: 0,
         dialog: false,
         respuesta:[],
+        fallido:[]
       };
     },
     methods: {
@@ -94,6 +99,7 @@
             //res.data
             this.progress = null;
             this.respuesta = res.data.nombre
+            this.fallido = res.data
             console.log(this.respuesta)
             this.dialog = true
           })
