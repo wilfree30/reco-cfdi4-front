@@ -55,18 +55,22 @@
        // sending file to the backend
         axios
           .post("https://reco-api.centralexpress.info/upload", formData, { 
-            onUploadProgress: ProgressEvent => {
-            let progress =
-              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)
-              +"%";
-            this.progress = progress;
-          }
+            headers: {
+              "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: progressEvent => {
+              this.progress = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              ) + "%";
+            }
           })
-          .then(res => {
+          .then((res) => {
             console.log(res);
+            this.progress = null;
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
+            this.progress = null;
           });
       }
     }
