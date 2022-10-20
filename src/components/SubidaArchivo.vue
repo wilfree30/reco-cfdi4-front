@@ -71,7 +71,7 @@
           })
           .then((res) => {
             res.data
-            console.log(res);
+            alert(res.data.nombre);
             this.progress = null;
           })
           .catch((err) => {
