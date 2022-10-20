@@ -30,6 +30,22 @@
         </v-col>
       </v-row>
     </v-card>
+    <v-snackbar
+        v-model="dialog"
+        :timeout="1500"
+    >   
+        {{respuesta}}
+        <template v-slot:action="{ attrs }">
+            <v-btn
+            color="blue"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+            >
+            Cerrar
+            </v-btn>
+        </template>
+    </v-snackbar>
   </v-container>
   </template>
   
@@ -41,9 +57,14 @@
       return {
         selectedFile: "",
         progress: 0,
+        dialog: false,
+        respuesta:[],
       };
     },
     methods: {
+      close(){
+        this.dialog = false;
+      },
       onFileChange(e) {
         const selectedFile = e.target.files[0]; // accessing file
         this.selectedFile = selectedFile;
@@ -60,9 +81,9 @@
               "accept": "application/json",
               "Content-Type": "multipart/form-data",
             },
-            data:{
+/*             data:{
               archivo_recibido: this.selectedFile
-            },
+            }, */
             onUploadProgress: progressEvent => {
               this.progress = Math.round(
                 (progressEvent.loaded / progressEvent.total) * 100
@@ -70,10 +91,11 @@
             }
           })
           .then((res) => {
-            res.data
-            alert(res.data);
-            console.log(res.data)
+            //res.data
             this.progress = null;
+            this.respuesta = res.data.nombre
+            console.log(this.respuesta)
+            this.dialog = true
           })
           .catch((err) => {
             console.log(err.response.data);
