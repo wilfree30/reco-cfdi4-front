@@ -17,9 +17,8 @@
       <v-row>
         <div class="d-flex pl-5 centrar accent-4">
           <v-btn 
-          @click="onUploadFile, loader = 'loading'" class="upload-button"
-            :disabled="!this.selectedFile || loading3"
-            :loading="loading3"
+            @click="onUploadFile" class="upload-button"
+            :disabled="!this.selectedFile"
             >ENVIAR</v-btn>
         </div>
       </v-row>      
@@ -61,22 +60,11 @@
   export default {
     data() {
       return {
-        loading3: false,
         selectedFile: "",
         progress: 0,
         dialog: false,
         respuesta:[],
       };
-    },
-    watch: {
-      loader () {
-        const l = this.loader
-        this[l] = !this[l]
-
-        setTimeout(() => (this[l] = false), 3000)
-
-        this.loader = null
-      },
     },
     methods: {
       close(){
