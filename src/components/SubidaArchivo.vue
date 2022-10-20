@@ -17,7 +17,7 @@
       <v-row>
         <div class="d-flex pl-5 centrar accent-4">
           <v-btn @click="onUploadFile" class="upload-button"
-            :disabled="!this.selectedFile, isLoading">ENVIAR</v-btn>
+            :disabled="!this.selectedFile || isLoading">ENVIAR</v-btn>
         </div>
       </v-row>      
       <v-row >
