@@ -17,7 +17,7 @@
       <v-row>
         <div class="d-flex pl-5 centrar accent-4">
           <v-btn @click="onUploadFile" class="upload-button"
-            :disabled="!this.selectedFile">ENVIAR</v-btn>
+            :disabled="isDisabled">ENVIAR</v-btn>
         </div>
       </v-row>      
       <v-row >
@@ -63,7 +63,8 @@
         progress: 0,
         dialog: false,
         respuesta:[],
-        fallido:[]
+        fallido:[],
+        isDisabled: !this.selectedFile
       };
     },
     methods: {
@@ -90,6 +91,7 @@
               archivo_recibido: this.selectedFile
             }, */
             onUploadProgress: progressEvent => {
+              this.isDisabled = false
               this.progress = Math.round(
                 (progressEvent.loaded / progressEvent.total) * 100
               ) + "%";
