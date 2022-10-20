@@ -40,7 +40,7 @@
             color="blue"
             text
             v-bind="attrs"
-            @click="snackbar = false"
+            @click="dialog = false"
             >
             Cerrar
             </v-btn>
