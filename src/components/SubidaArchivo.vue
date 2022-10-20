@@ -54,7 +54,7 @@
   
        // sending file to the backend
         axios
-          .post("http://localhost:4000/upload", formData, { 
+          .post("http://reco-api.centralexpress.info/upload", formData, { 
             headers: {
               "Content-Type": "multipart/form-data"
             },
