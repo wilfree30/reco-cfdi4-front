@@ -41,7 +41,6 @@
       return {
         selectedFile: "",
         progress: 0,
-        archivo_recibido: 'archivo_recibido',
       };
     },
     methods: {
@@ -72,12 +71,10 @@
           })
           .then((res) => {
             res.data
-            console.log(this.selectedFile)
             console.log(res);
             this.progress = null;
           })
           .catch((err) => {
-            console.log(this.selectedFile)
             console.log(err.response.data);
             this.progress = null;
           });
