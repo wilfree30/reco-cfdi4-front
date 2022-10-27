@@ -18,7 +18,7 @@
         <div class="d-flex pl-5 centrar accent-4">
           <v-btn 
             :loading="loading3"
-            @click="onUploadFile, loader = 'loading3'" class="upload-button"
+            @click="onUploadFile" class="upload-button"
             :disabled="!this.selectedFile || loading3"
             >ENVIAR</v-btn>
         </div>
