@@ -28,7 +28,7 @@
           <div class="d-flex centrar l-16 l-auto pa-5 accent-4 red--text">
             *Te invitamos a ser parte de la actualización del Servicio de facturación CFDI versión 4.0.
             <br>
-            **Es sencillo, solo tienes que seleccionar el archivo que contiene tu Contstancia de Identificación Fiscal (CIF) en formato .pdf y presionar el botón de "ENVIAR"
+            **Es sencillo, solo tienes que seleccionar el archivo que contiene tu Constancia de Identificación Fiscal (CIF) en formato .pdf y presionar el botón de "ENVIAR"
           </div>
         </v-col>
       </v-row>
